@@ -1,0 +1,14 @@
+{
+    "Dashboard": true,
+    "Admin": true,
+    "MailSenders": true,
+    "List": true,
+    "EmailList": true,
+    "PhishingList": true,
+    "MailTemplates": true,
+    "Setting": true,
+    "Schedule": true,
+    "UserData": true,
+    "Subject": true,
+    "Grade": true
+}
