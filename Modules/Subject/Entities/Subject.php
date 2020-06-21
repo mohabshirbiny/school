@@ -3,8 +3,13 @@
 namespace Modules\Subject\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Modules\Grade\Entities\Grade;
 class Subject extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['name','image','grade'];
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
 }

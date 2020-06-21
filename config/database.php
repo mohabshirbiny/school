@@ -42,29 +42,7 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
-        'oracle' => [
-            'driver'        => 'oracle',
-            'host' => env('OR_DB_HOST', ''),
-            'port' => env('OR_DB_PORT', '1521'),
-            'database' => env('OR_DB_DATABASE', '1521'),
-            'service_name' => env('SERVICE_NAME', ''),
-            'username' => env('OR_DB_USERNAME', ''),
-            'password' => env('OR_DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => 'phishing_',
-        ],
-
-        'oracle_without_p' => [
-            'driver'        => 'oracle',
-            'host' => env('OR_DB_HOST', ''),
-            'port' => env('OR_DB_PORT', '1521'),
-            'database' => env('OR_DB_DATABASE', '1521'),
-            'service_name' => env('SERVICE_NAME', ''),
-            'username' => env('OR_DB_USERNAME', ''),
-            'password' => env('OR_DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-        ],
+        
 
         'mysql' => [
             'driver' => 'mysql',

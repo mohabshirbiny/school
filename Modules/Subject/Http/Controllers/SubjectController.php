@@ -44,7 +44,7 @@ class SubjectController extends Controller
             
         $subject = new Subject();
         $subject->name = $request->input('name');
-        $subject->grade = ($request->input('grade') != 0 )? $request->input('grade') : null;
+        $subject->grade_id = ($request->input('grade') != 0 )? $request->input('grade') : null;
         $subject->save();
 
         return redirect(route('admin.subjects.index'));
@@ -87,7 +87,7 @@ class SubjectController extends Controller
 
         $subject = Subject::findOrFail($id);
         $subject->name = $request->input('name');
-        $subject->grade = $request->input('grade');
+        $subject->grade_id = $request->input('grade');
         $subject->save();
         
         return redirect(route('admin.subjects.index'));

@@ -40,8 +40,8 @@ class User extends Authenticatable
     ];
 
 
-    public function getGrade()
+    public function grade()
     {
-        return $this->belongsTo(Grade::class,'grade');
+        return $this->belongsTo(Grade::class);
     }
 }

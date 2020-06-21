@@ -14,7 +14,8 @@ class LessonController extends Controller
      */
     public function index()
     {
-        return view('subject::index');
+        $subjects = Subject::paginate(20);
+        return view('subject::subjects.index',compact('subjects'));
     }
 
     /**
@@ -23,7 +24,8 @@ class LessonController extends Controller
      */
     public function create()
     {
-        return view('subject::create');
+        $grades = Grade::all();
+        return view('subject::subjects.create',compact('grades'));
     }
 
     /**
@@ -33,7 +35,17 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'grade' => 'required|not_in:0',
+        ]);
+            
+        $subject = new Subject();
+        $subject->name = $request->input('name');
+        $subject->grade_id = ($request->input('grade') != 0 )? $request->input('grade') : null;
+        $subject->save();
+
+        return redirect(route('admin.subjects.index'));
     }
 
     /**
@@ -43,7 +55,7 @@ class LessonController extends Controller
      */
     public function show($id)
     {
-        return view('subject::show');
+        return view('subject::subjects.show');
     }
 
     /**
@@ -53,7 +65,10 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        return view('subject::edit');
+        $subject = Subject::findOrFail($id);
+        $grades = Grade::all();
+
+        return view('subject::subjects.edit',compact('subject','grades'));
     }
 
     /**
@@ -64,7 +79,16 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
+        $subject = Subject::findOrFail($id);
+        $subject->name = $request->input('name');
+        $subject->grade_id = $request->input('grade');
+        $subject->save();
+        
+        return redirect(route('admin.subjects.index'));
     }
 
     /**

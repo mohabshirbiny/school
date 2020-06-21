@@ -58,27 +58,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group row" id="grade_div" style="display: none">
+                    <div class="form-group row" id="grade_div"  @if ($user->user_type != 'student')  style="display: none" @endif>
                             <label class="col-md-2">Student Grade</label>
                             <div class="col-md-6">
-                                <select name="grade" id="grade" class="form-control select2">
+                                <select name="grade" id="grade" class="form-control select2" >
                                     
                                     <option value="0">Choose Grade</option>    
                                     @foreach ($grades as $grade)
-                                        <option value="{{$grade->id}}" @if ($user->grade == $grade->id ) selected @endif>{{$grade->name}}</option>    
+                                        <option value="{{$grade->id}}" @if ($user->grade_id == $grade->id ) selected @endif>{{$grade->name}}</option>    
                                     @endforeach
                                     
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row" id="parent_div" style="display: none">
+                        
+                        
+                        <div class="form-group row" id="parent_div" @if ($user->user_type != 'parent')  style="display: none" @endif>
                             <label class="col-md-2">Parent of student</label>
                             <div class="col-md-6">
                                 <select name="parent_id" id="parent_id" class="form-control select2">
                                     
                                     <option value="0">Choose Student</option>    
                                     @foreach ($students as $student)
-                                        <option value="{{$student->id}}" @if ($user ) selected @endif>{{$student->name}}</option>    
+                                        <option value="{{$student->id}}" @if ($user->parent_id == $student->id ) selected @endif>{{$student->name}}</option>    
                                     @endforeach
                                     
                                 </select>

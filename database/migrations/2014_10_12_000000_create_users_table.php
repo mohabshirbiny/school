@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('grade')->nullable();
+            $table->integer('grade_id')->nullable();
             $table->integer('parent_id')->nullable();
             $table->text('image')->nullable();
             $table->enum('user_type',['parent','student','teacher'])->default(null);

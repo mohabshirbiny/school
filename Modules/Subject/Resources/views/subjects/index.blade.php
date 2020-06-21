@@ -28,7 +28,7 @@
                                 <tr>
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
-                                    <td>{{ $user->grade }}</td>
+                                    <td>{{ $user->grade->name }}</td>
                                     <td><a href="{{ route('admin.subjects.edit', $user->id) }}">Edit</a></td>
                                 </tr>
                             @endforeach

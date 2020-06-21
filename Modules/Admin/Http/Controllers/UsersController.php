@@ -54,8 +54,16 @@ class UsersController extends Controller
         $user->phone_number = $request->input('phone_number');
         $user->password = Hash::make($request->input('password'));
         $user->user_type = $request->input('user_type');
-        $user->grade = ($request->input('grade') != 0 )? $request->input('grade') : null;
+        $user->grade_id = ($request->input('grade') != 0 )? $request->input('grade') : null;
         $user->parent_id = ($request->input('parent_id') != 0 )? $request->input('parent_id') : null;
+        
+        if ($user->parent_id ) {
+            $student = User::find($request->input('parent_id'));
+            $student->parent_id = $user->id;
+            $student->save();
+        }
+       
+
         $user->save();
 
         return redirect(route('admin.users.index'));
@@ -100,12 +108,33 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-
-        if($request->input('password') != '') {
-            $user->password = Hash::make($request->input('password'));
+        $user->phone_number = $request->input('phone_number');
+        $user->password = Hash::make($request->input('password'));
+        $user->user_type = $request->input('user_type');
+        
+        switch ($user->user_type) {
+            case 'teacher':
+                    $user->grade_id =  null;
+                    $user->parent_id = null;
+                break;
+            case 'student':
+                    $user->grade_id = $request->input('grade') ;
+                    $user->parent_id =  null;
+                break;
+            case 'parent':
+                    $user->grade_id =  null;
+                    $user->parent_id = null;
+                    
+                    $student = User::find($request->input('parent_id'));
+                    $student->parent_id = $user->id;
+                    $student->save();
+                break;
+            
+            default:
+                # code...
+                break;
         }
 
-        $user->admin = $request->input('role');
         $user->save();
         return redirect(route('admin.users.index'));
     }

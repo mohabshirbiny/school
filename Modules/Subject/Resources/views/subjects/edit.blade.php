@@ -31,7 +31,7 @@
                                     
                                     <option value="0">Choose Grade</option>    
                                     @foreach ($grades as $grade)
-                                        <option value="{{$grade->id}}" @if ($subject->grade == $grade->id ) selected @endif>{{$grade->name}}</option>    
+                                        <option value="{{$grade->id}}" @if ($subject->grade_id == $grade->id ) selected @endif>{{$grade->name}}</option>    
                                     @endforeach
                                     
                                 </select>

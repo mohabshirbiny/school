@@ -39,19 +39,40 @@
 				<li class="nav-item has-treeview active">
 					<a href="" class="nav-link">
 						<i class="fas fa-envelope-open-text"></i>
-						<p>Grades</p>
+						<p>Subjects</p>
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item ">
-							<a href="{{route('admin.grades.index')}}" class="nav-link">
+							<a href="{{route('admin.subjects.index')}}" class="nav-link">
 								<i class="fas fa-th-list"></i>
 								<p>List All</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{route('admin.grades.create')}}" class="nav-link">
+							<a href="{{route('admin.subjects.create')}}" class="nav-link">
 								<i class="far fa-plus-square"></i>
-								<p>Add new Grade</p>
+								<p>Add new Subject</p>
+							</a>
+						</li>
+						
+					</ul>
+				</li>
+				<li class="nav-item has-treeview active">
+					<a href="" class="nav-link">
+						<i class="fas fa-envelope-open-text"></i>
+						<p>Lessons</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item ">
+							<a href="{{route('admin.lessons.index')}}" class="nav-link">
+								<i class="fas fa-th-list"></i>
+								<p>List All</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{route('admin.lessons.create')}}" class="nav-link">
+								<i class="far fa-plus-square"></i>
+								<p>Add new Lesson</p>
 							</a>
 						</li>
 						
