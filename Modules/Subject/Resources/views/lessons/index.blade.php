@@ -1,15 +1,15 @@
 @extends('layouts.master')
 
-@section('title','Users')
+@section('title','Lessons')
 
-@section('sub_header','Users')
+@section('sub_header','Lessons')
 
 @section('content')
     <div class="row  ">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Users
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-outline-primary float-right">Add new User</a>
+                <div class="card-header">Lessons
+                    <a href="{{ route('admin.lessons.create') }}" class="btn btn-outline-primary float-right">Add new Lesson</a>
                 </div>
                 <div class="card-body">
 
@@ -18,25 +18,24 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>User Type</th>
+                                <th>Subject</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach($users as $user)
+                            @foreach($lessons as $lesson)
                                 <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->user_type }}</td>
-                                    <td><a href="{{ route('admin.users.edit', $user->id) }}">Edit</a></td>
+                                    <td>{{ $lesson->id }}</td>
+                                    <td>{{ $lesson->name }}</td>
+                                    <td>{{ $lesson->subject->name }}</td>
+                                    
+                                    <td><a href="{{ route('admin.lessons.edit', $lesson->id) }}">Edit</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $users->links() }}
+                    {{ $lessons->links() }}
                 </div>
             </div>
         </div>

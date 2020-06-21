@@ -24,12 +24,13 @@
                         </thead>
 
                         <tbody>
-                            @foreach($subjects as $user)
+                            @foreach($subjects as $subject)
                                 <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->grade->name }}</td>
-                                    <td><a href="{{ route('admin.subjects.edit', $user->id) }}">Edit</a></td>
+                                    
+                                    <td>{{ $subject->id }}</td>
+                                    <td>{{ $subject->name }}</td>
+                                    <td>{{ $subject->grade->name }}</td>
+                                    <td><a href="{{ route('admin.subjects.edit', $subject->id) }}">Edit</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

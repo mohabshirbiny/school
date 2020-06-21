@@ -1,18 +1,32 @@
 
 @extends('layouts.master')
 
-@section('title','Create New User')
+@section('title','Create New Lesson')
 
-@section('sub_header','Create New User')
+@section('sub_header','Create New Lesson')
 
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Add new User</div>
+                <div class="card-header">Add new Lesson</div>
                 <div class="card-body">
-                    <form action="{{ route('admin.users.store') }}" method="post">
+                    <form action="{{ route('admin.lessons.store') }}" method="post">
                         @csrf
+
+                        <div class="form-group row" id="grade_div" >
+                            <label class="col-md-2">Subject</label>
+                            <div class="col-md-6">
+                                <select name="subject_id" id="subject_id" class="form-control select2">
+                                    
+                                    <option value="0">Choose subject</option>    
+                                    @foreach ($subjects as $subject)
+                                        <option value="{{$subject->id}}">{{$subject->name}}</option>    
+                                    @endforeach
+                                    
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-md-2">Name</label>
@@ -22,67 +36,29 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">Phone Number</label>
+                            <label class="col-md-2">Description</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" name="phone_number" >
+                                <textarea name="desc" id="" cols="55" rows="5"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">Email</label>
+                            <label class="col-md-2">upload PDF</label>
                             <div class="col-md-6">
-                                <input type="email" class="form-control input-lg" name="email" required>
+                                <input type="file" class="form-control" name="pdf" >
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">Password</label>
+                            <label class="col-md-2">upload Video</label>
                             <div class="col-md-6">
-                                <input type="password" class="form-control input-lg" name="password" required>
+                                <input type="file" class="form-control" name="video" >
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-md-2">User Type</label>
-                            <div class="col-md-10">
-                                <div class="radio">
-                                    <label><input type="radio" name="user_type" value="teacher" checked> Teacher</label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="user_type" value="student"> Student</label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="user_type" value="parent"> Parent</label>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group row" id="grade_div" style="display: none">
-                            <label class="col-md-2">Student Grade</label>
-                            <div class="col-md-6">
-                                <select name="grade" id="grade" class="form-control select2">
-                                    
-                                    <option value="0">Choose Grade</option>    
-                                    @foreach ($grades as $grade)
-                                        <option value="{{$grade->id}}">{{$grade->name}}</option>    
-                                    @endforeach
-                                    
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row" id="parent_div" style="display: none">
-                            <label class="col-md-2">Parent of student</label>
-                            <div class="col-md-6">
-                                <select name="parent_id" id="parent_id" class="form-control select2">
-                                    
-                                    <option value="0">Choose Student</option>    
-                                    @foreach ($students as $student)
-                                        <option value="{{$student->id}}">{{$student->name}}</option>    
-                                    @endforeach
-                                    
-                                </select>
-                            </div>
-                        </div>
+                        
+                        
 
 
 

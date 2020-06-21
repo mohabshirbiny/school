@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['name','desc','pdf','video','subject_id','image'];
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
 }

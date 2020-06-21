@@ -5,6 +5,9 @@ namespace Modules\Subject\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Grade\Entities\Grade;
+use Modules\Subject\Entities\Lesson;
+use Modules\Subject\Entities\Subject;
 
 class LessonController extends Controller
 {
@@ -14,8 +17,8 @@ class LessonController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::paginate(20);
-        return view('subject::subjects.index',compact('subjects'));
+        $lessons = Lesson::paginate(20);
+        return view('subject::lessons.index',compact('lessons'));
     }
 
     /**
@@ -24,8 +27,8 @@ class LessonController extends Controller
      */
     public function create()
     {
-        $grades = Grade::all();
-        return view('subject::subjects.create',compact('grades'));
+        $subjects = Subject::all();
+        return view('subject::lessons.create',compact('subjects'));
     }
 
     /**
@@ -37,13 +40,14 @@ class LessonController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'grade' => 'required|not_in:0',
+            'subject_id' => 'required|not_in:0',
         ]);
             
-        $subject = new Subject();
-        $subject->name = $request->input('name');
-        $subject->grade_id = ($request->input('grade') != 0 )? $request->input('grade') : null;
-        $subject->save();
+        $lesson = new Lesson();
+        $lesson->name = $request->input('name');
+        $lesson->desc = $request->input('desc');
+        $lesson->subject_id = $request->input('subject_id');
+        $lesson->save();
 
         return redirect(route('admin.subjects.index'));
     }
@@ -55,7 +59,7 @@ class LessonController extends Controller
      */
     public function show($id)
     {
-        return view('subject::subjects.show');
+        return view('subject::lessons.show');
     }
 
     /**
@@ -65,10 +69,10 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        $subject = Subject::findOrFail($id);
+        $subject = Lesson::findOrFail($id);
         $grades = Grade::all();
 
-        return view('subject::subjects.edit',compact('subject','grades'));
+        return view('subject::lessons.edit',compact('subject','grades'));
     }
 
     /**
@@ -83,7 +87,7 @@ class LessonController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $subject = Subject::findOrFail($id);
+        $subject = Lesson::findOrFail($id);
         $subject->name = $request->input('name');
         $subject->grade_id = $request->input('grade');
         $subject->save();
