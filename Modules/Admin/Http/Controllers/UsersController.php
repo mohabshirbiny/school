@@ -104,12 +104,16 @@ class UsersController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
         ]);
-
+            
         $user = User::findOrFail($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->phone_number = $request->input('phone_number');
-        $user->password = Hash::make($request->input('password'));
+        
+        if ($request->input('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+        
         $user->user_type = $request->input('user_type');
         
         switch ($user->user_type) {
