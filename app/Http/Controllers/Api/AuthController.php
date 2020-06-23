@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
+use Modules\Subject\Entities\Result;
+use Modules\Subject\Entities\Subject;
 
 class AuthController extends Controller
 {
@@ -34,6 +36,7 @@ class AuthController extends Controller
 
         $data = [
             'user'  => $user,
+            'grade'  => $user->grade,
         ];
 
         return response()->json($this->prepareResponse('success',$data,200)); 
@@ -52,6 +55,71 @@ class AuthController extends Controller
 
         // dd($subjects);
         return response()->json($this->prepareResponse('success',$subjects,200)); 
+    }
+
+    public function getSubjectLessons($subject_id) {
+        
+        $subject = Subject::find($subject_id);
+
+        if (!$subject) {
+            return response()->json($this->prepareResponse('error','no subject',400)); 
+        }
+
+        $lessons = $subject->lessons->toArray() ;
+
+        // dd($subjects);
+        return response()->json($this->prepareResponse('success',$lessons,200)); 
+    }
+
+    public function getSubjectQuestions($subject_id) {
+        
+        $subject = Subject::find($subject_id);
+
+        if (!$subject) {
+            return response()->json($this->prepareResponse('error','no subject',400)); 
+        }
+
+        $questions = $subject->questions->toArray() ;
+
+        // dd($subjects);
+        return response()->json($this->prepareResponse('success',$questions,200)); 
+    }
+
+    public function addSubjectResult(Request $request) {
+        
+        $this->validate($request, [
+            'subject_id'           => 'required',
+            'score'           => 'required',
+            'status'           => 'required',
+        ]);
+
+        $subject = Subject::find($request->subject_id);
+
+        if (!$subject) {
+            return response()->json($this->prepareResponse('error','no subject',400)); 
+        }
+        
+        $result = new Result();
+        $result->score = $request->input('score');
+        $result->status = $request->input('status');
+        $result->subject_id = $request->input('subject_id');
+        $result->user_id = Auth::user()->id;
+        $result->save();
+
+        return response()->json($this->prepareResponse('success',['added successfully'],200)); 
+    }
+
+    public function getSubjectResult($subject_id) {
+      
+        $subject = Subject::find($subject_id);
+
+        if (!$subject) {
+            return response()->json($this->prepareResponse('error','no subject',400)); 
+        }
+        
+        $result = Result::where(['user_id' => Auth::user()->id,'subject_id' => $subject_id ])->first();
+
+        return response()->json($this->prepareResponse('success',$result,200)); 
     }
 
 

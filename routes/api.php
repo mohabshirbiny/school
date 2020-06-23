@@ -19,5 +19,9 @@ Route::prefix('v1')->group(function(){
     Route::group(['middleware' => 'auth:api'], function() {
         Route::get('user_profile', 'Api\AuthController@getUserProfile');
         Route::get('get_subjects', 'Api\AuthController@getUserSubjects');
+        Route::get('get_lessons/{subject_id}', 'Api\AuthController@getSubjectLessons');
+        Route::get('get_questions/{subject_id}', 'Api\AuthController@getSubjectQuestions');
+        Route::post('add_result', 'Api\AuthController@addSubjectResult');
+        Route::get('get_result/{subject_id}', 'Api\AuthController@getSubjectResult');
     });
 });

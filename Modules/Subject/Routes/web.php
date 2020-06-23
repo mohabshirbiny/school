@@ -14,5 +14,6 @@
 
 Route::prefix('dashboard')->middleware('admin')->group(function() {
     Route::resource('subjects', 'SubjectController', ['as' => 'admin']);
+    Route::resource('questions', 'QuestionController', ['as' => 'admin']);
     Route::resource('lessons', 'LessonController', ['as' => 'admin']);
 });

@@ -60,6 +60,27 @@
 				<li class="nav-item has-treeview active">
 					<a href="" class="nav-link">
 						<i class="fas fa-envelope-open-text"></i>
+						<p>Qusetions</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item ">
+							<a href="{{route('admin.questions.index')}}" class="nav-link">
+								<i class="fas fa-th-list"></i>
+								<p>List All</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{route('admin.questions.create')}}" class="nav-link">
+								<i class="far fa-plus-square"></i>
+								<p>Add new Question</p>
+							</a>
+						</li>
+						
+					</ul>
+				</li>
+				<li class="nav-item has-treeview active">
+					<a href="" class="nav-link">
+						<i class="fas fa-envelope-open-text"></i>
 						<p>Lessons</p>
 					</a>
 					<ul class="nav nav-treeview">
